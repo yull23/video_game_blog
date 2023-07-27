@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company: one
+  game: one
+  developer: false
+  publisher: false
+
+two:
+  company: two
+  game: two
+  developer: false
+  publisher: false

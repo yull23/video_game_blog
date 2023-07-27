@@ -1,0 +1,2 @@
+rails g migration CreateJoinTableGamePlatform game platform
+rails g migration CreateJoinTableGameGenre game genre
