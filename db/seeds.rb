@@ -15,9 +15,24 @@ User.destroy_all
 
 
 user=User.create(username:"Yull")
-user.critics.create(title:"Title")
 company=Company.create(name:"Nintendo")
 game=Game.create(name:"Mario Bros")
+user.critics.create(title:"Title",criticable:game)
+user.critics.create(title:"Title",criticable:company)
+
+Critic.create(
+  title:"Title",
+  user_id:1,
+  criticable_type:"Game",
+  criticable_id:1
+)
+Critic.create(
+  title:"Title",
+  user_id:1,
+  criticable_type:"Company",
+  criticable_id:1
+)
+
 game.involed_companies.create(
   developer:true,
   publisher:true,

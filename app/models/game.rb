@@ -13,4 +13,6 @@ class Game < ApplicationRecord
                         dependent: :destroy,
                         inverse_of: "parent"
   belongs_to :parent, class_name: "Game", optional: true
+  # Relating polymorphically to the Critic model through criticable
+  has_many :critics, as: :criticable, dependent: :destroy
 end

@@ -100,13 +100,10 @@ There is only one model that has this relationship, and that is the Game model, 
 
 When having a Self Join relationship, you must have a column that stores that relationship. Therefore, the migration and editing of the file is carried out first.
 
-```
-rails generate migration AddParentToGame parent:references
-```
-
 Adding reference to the game model.
 
 ```
+# rails generate migration AddParentToGame parent:references
 class AddParentToGame < ActiveRecord::Migration[7.0]
   def change
     add_reference :games, :parent, foreign_key: {to_table: :games}
@@ -129,9 +126,75 @@ end
 These methods allow one Game to be associated to another, through the parent_id ("parent") column, and to access the expansions inversely, through the expansions attribute, as if it were a new column.
 
 ```
+game=Game.create(name:"Mario Bros")
 game_parent=Game.create(name:"Mario Bros Run")
 game_parent.update(parent:game)
 
 game_expansion=Game.create(name:"Residen Evil")
 game_expansion.expansions.create(name: "Resident Evil 2")
+```
+
+### Polymorphic relationships
+
+First, the migration is carried out to create the columns corresponding to a polymorphic association.
+
+Adding reference to the game model.
+
+```
+# rails generate migration AddCriticableToCritics criticable:references{polymorphic}
+class AddCriticableToCritics < ActiveRecord::Migration[7.0]
+  def change
+    add_reference :critics, :criticable, polymorphic: true, null: false
+  end
+end
+```
+
+It is declared that it can be used to other models by means of the polymorphic association (link = > criticable)
+
+```
+class Critic < ApplicationRecord
+  # Relation N to 1 with User
+  belongs_to :user
+  # Adding polymorphic relationship
+  belongs_to :criticable, polymorphic: true
+end
+```
+
+The creation of the suffix columns "type" and "id" should be checked
+
+```
+  create_table "critics", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "criticable_type", null: false
+    t.bigint "criticable_id", null: false
+    t.index ["criticable_type", "criticable_id"], name: "index_critics_on_criticable"
+    t.index ["user_id"], name: "index_critics_on_user_id"
+  end
+```
+
+De esta forma, para crear un objeto crítico, se debe vincular a una compañía o juego, mediante el uso de criticable:, criticable_type: o criticable_id:
+
+```
+user=User.create(username:"Yull")
+company=Company.create(name:"Nintendo")
+game=Game.create(name:"Mario Bros")
+user.critics.create(title:"Title",criticable:game)
+user.critics.create(title:"Title",criticable:company)
+
+Critic.create(
+  title:"Title",
+  user_id:1,
+  criticable_type:"Game",
+  criticable_id:1
+)
+Critic.create(
+  title:"Title",
+  user_id:1,
+  criticable_type:"Company",
+  criticable_id:1
+)
 ```
