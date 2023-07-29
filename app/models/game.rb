@@ -15,4 +15,9 @@ class Game < ApplicationRecord
   belongs_to :parent, class_name: "Game", optional: true
   # Relating polymorphically to the Critic model through criticable
   has_many :critics, as: :criticable, dependent: :destroy
+  # Adding enum to category table values
+  enum :category, {
+    main_game: 0,
+    expansion: 1
+  }
 end

@@ -176,7 +176,7 @@ The creation of the suffix columns "type" and "id" should be checked
   end
 ```
 
-De esta forma, para crear un objeto crítico, se debe vincular a una compañía o juego, mediante el uso de criticable:, criticable_type: o criticable_id:
+Thus, to create a critical object, it must be linked to a company or game, by using criticable:, criticable_type: or criticable_id:
 
 ```
 user=User.create(username:"Yull")
@@ -197,4 +197,64 @@ Critic.create(
   criticable_type:"Company",
   criticable_id:1
 )
+```
+
+## Query interface
+
+For the interface query, the enum method is used to encapsulate the key:value, corresponding to a column.
+Estos valores al momento de crear las tablas, si no se especifica, posee un valor por defecto de null, para ello se debe realizar la migración reversible correspondiente, para que puedan optar el valor por defecto que se requiera.
+
+### Enum in games category
+
+On first test, you don't bind these values to the parent_id column, just make the declaration
+
+```
+class Game < ApplicationRecord
+  enum :category, {
+    main_game: 0,
+    expansion: 1
+  }
+end
+```
+
+Adding the default value, depending on the migration:
+
+```
+# rails generate migration AddDefaultCategoryToGames
+class AddDefaultCategoryToGames < ActiveRecord::Migration[7.0]
+  def change
+    reversible do |dir|
+      dir.up {change_column :games, :category, :integer, default:0}
+      dir.down {change_column :games, :category, :integer, default:nil}
+    end
+  end
+end
+```
+
+### Enum in platform name
+
+In the same way, the key:value assignment is made for the category column.
+
+```
+class Platform < ApplicationRecord
+  enum :category, {
+    console: 0,
+    arcade: 1,
+    platform: 2,
+    operating_system: 3,
+    portable_console: 4,
+    computer: 5
+  }
+end
+```
+
+For this case, a default value must be assigned in the same way, however, according to the rails guide, there is the change_column_default method.
+
+```
+# rails generate migration AddDefaultCategoryToPlatforms
+class AddDefaultCategoryToPlatforms < ActiveRecord::Migration[7.0]
+  def change
+    change_column_default :platforms, :category, from:nil, to: 0
+  end
+end
 ```
