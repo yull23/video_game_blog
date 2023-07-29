@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-  has_many :critics
+  has_many :critics, dependent: :destroy
 end
