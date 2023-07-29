@@ -11,6 +11,8 @@ Primero se realiza la creación de los modelos
 
 ## Associations between models
 
+We have the associations of the following relationships between models:
+
 ### Relationships from 1 to N and N to N.
 
 1. Relationship
@@ -92,4 +94,44 @@ Primero se realiza la creación de los modelos
    end
    ```
 
-### Self bound relationships
+### Relationships Self Joins
+
+There is only one model that has this relationship, and that is the Game model, which is expected to be related to it, through the parent, which means that a parent can have many games (children or expansions), while one game can only have one father
+
+When having a Self Join relationship, you must have a column that stores that relationship. Therefore, the migration and editing of the file is carried out first.
+
+```
+rails generate migration AddParentToGame parent:references
+```
+
+Adding reference to the game model.
+
+```
+class AddParentToGame < ActiveRecord::Migration[7.0]
+  def change
+    add_reference :games, :parent, foreign_key: {to_table: :games}
+  end
+end
+```
+
+Associating to the same table (Model).
+
+```
+class Game < ApplicationRecord
+  has_many :expansions, class_name: "Game",
+                        foreign_key: "parent_id",
+                        dependent: :destroy,
+                        inverse_of: "parent"
+  belongs_to :parent, class_name: "Game", optional: true
+end
+```
+
+These methods allow one Game to be associated to another, through the parent_id ("parent") column, and to access the expansions inversely, through the expansions attribute, as if it were a new column.
+
+```
+game_parent=Game.create(name:"Mario Bros Run")
+game_parent.update(parent:game)
+
+game_expansion=Game.create(name:"Residen Evil")
+game_expansion.expansions.create(name: "Resident Evil 2")
+```
