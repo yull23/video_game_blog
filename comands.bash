@@ -13,3 +13,4 @@ rails generate migration AddParentToGame parent:references
 rails generate migration AddCriticableToCritics criticable:references{polymorphic}
 rails generate migration AddDefaultCategoryToGames
 rails generate migration AddDefaultCategoryToPlatforms
+rails generate migration AddDefaultCriticsCountToUser 
