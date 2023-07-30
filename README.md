@@ -307,6 +307,11 @@ end
 
 ## Model validations
 
+### User:
+
+- username, email: required and unique
+- birth_date: before 16 years from now. Message: You should be 16 years old to create an account (this one requires custom validations)
+
 ### Critic:
 
 - title, body: required
@@ -342,11 +347,6 @@ end
 - name: unique
 - rating: between 0 and 100 (if provided)
 - parent_id: if the category is expansion, parent_id should be a valid game_id. If a category is main_game, parent_id should be null.
-
-### User:
-
-- username, email: required and unique
-- birth_date: before 16 years from now. Message: You should be 16 years old to create an account (this one requires custom validations)
 
 ### Platform:
 

@@ -5,6 +5,9 @@ class Critic < ApplicationRecord
   # Adding polymorphic relationship
   belongs_to :criticable, polymorphic: true
 
+  # Model validation
+  validates :body, presence: true, length: { maximum: 40 }
+
   # Conteo
   # after_create :count_create_critic
   # after_destroy :count_destroy_critic
