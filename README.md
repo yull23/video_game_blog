@@ -5,6 +5,7 @@ Primero se realiza la creación de los modelos
 ## Creación de modelos
 
 1. Modelo User
+
    Posee una relación de 1 a N con el modelo Critic
    Se realiza primeramente
    rails generate model User
@@ -261,4 +262,106 @@ end
 
 ## Callback
 
-Los Callbacks utilizados
+The count of the critics was carried out, through the use of callbacks, for this, the count was first carried out manually.
+
+```
+# rails generate migration AddDefaultCriticsCountToUser
+class AddDefaultCriticsCountToUser < ActiveRecord::Migration[7.0]
+  def change
+    change_column_default :users, :critics_count, from:nil, to: 0
+  end
+end
+```
+
+The default value is initialized to zero, as a crit is increased it will add 1, and as a crit is removed it will subtract 1.
+
+```
+class Critic < ApplicationRecord
+  after_create :count_create_critic
+  after_destroy :count_destroy_critic
+
+  private
+
+  def count_create_critic
+    user_count = user
+    user.critics_count += 1
+    user_count.save
+  end
+
+  def count_destroy_critic
+    user_count = user
+    user.critics_count -= 1
+    user_count.save
+  end
+end
+```
+
+However, it can be done more directly, by using counter_cache. [More about it](https://guides.rubyonrails.org/association_basics.html#options-for-belongs-to-counter-cache)
+
+```
+class Critic < ApplicationRecord
+  belongs_to :user, counter_cache: true
+  belongs_to :criticable, polymorphic: true
+end
+```
+
+## Model validations
+
+### Critic:
+
+- title, body: required
+- title: max 40 characters
+
+1. Validation
+
+```
+
+```
+
+1. Test
+
+```
+
+```
+
+1. Validation
+
+```
+
+```
+
+1. Test
+
+```
+
+```
+
+### Game:
+
+- name, category: required
+- name: unique
+- rating: between 0 and 100 (if provided)
+- parent_id: if the category is expansion, parent_id should be a valid game_id. If a category is main_game, parent_id should be null.
+
+### User:
+
+- username, email: required and unique
+- birth_date: before 16 years from now. Message: You should be 16 years old to create an account (this one requires custom validations)
+
+### Platform:
+
+- name, category: required
+- name: unique
+
+### Genre:
+
+- name: required and unique
+
+### Company:
+
+- name: required and unique
+
+### InvolvedCompany:
+
+- developer, publisher: required
+- company_id and game_id should be a unique combination
