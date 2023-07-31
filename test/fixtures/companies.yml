@@ -1,5 +1,26 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+company_1:
+  name: Nintendo
+  description: Leading video game company known for its consoles and iconic characters.
+  start_date: 1889-09-23
+  country: Japan
+  cover: string
+
+company_2:
+  name: Sony Interactive Entertainment
+  description: Producer of PlayStation consoles and games.
+  start_date: 1993-12-03
+  country: Japan
+  cover: string
+
+company_3:
+  name: Microsoft Corporation
+  description: Creator of Xbox consoles and games.
+  start_date: 1975-04-04
+  country: United States
+  cover: string
+
 one:
   name: MyString
   description: MyText

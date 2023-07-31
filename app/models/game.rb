@@ -20,4 +20,5 @@ class Game < ApplicationRecord
     main_game: 0,
     expansion: 1
   }
+  
 end
