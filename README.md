@@ -323,49 +323,15 @@ For all these reasons, null:false constraints in the database must be performed 
 
 ### Initial testing using seed.rb
 
-```
-
-```
-
 ### User:
 
 - username, email: required and unique
 - birth_date: before 16 years from now. Message: You should be 16 years old to create an account (this one requires custom validations)
 
-It has the following validations, tests and creation of objects:
-
-![User Validation](/z_others/reference_images/user_validations.jpeg)
-
-The test to verify the associations between models involves the creation of the critical model:
-
 ### Critic:
 
 - title, body: required
 - title: max 40 characters
-
-1. Validation
-
-```
-
-```
-
-1. Test
-
-```
-
-```
-
-1. Validation
-
-```
-
-```
-
-1. Test
-
-```
-
-```
 
 ### Game:
 
@@ -381,15 +347,9 @@ The test to verify the associations between models involves the creation of the 
 
 The validation to enter the platforms is shown:
 
-![Platform Validation](/z_others/reference_images/platform_validation.jpeg)
-
 ### Genre:
 
 - name: required and unique
-
-The validation for the entry in genres is shown:
-
-![Genre Validation](/z_others/reference_images/genre_validations.jpeg)
 
 ### Company:
 

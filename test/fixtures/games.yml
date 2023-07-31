@@ -1,5 +1,53 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+game_1:
+  name: "The Legend of Zelda: Breath of the Wild"
+  category: main_game
+  rating: 95
+
+game_2:
+  name: Super Mario Odyssey
+  category: main_game
+  rating: 96
+
+game_3:
+  name: "The Witcher 3: Wild Hunt"
+  category: main_game
+  rating: 92
+
+# game_4:
+#   name: "The Legend of Zelda: Breath of the Wild - Expansion Pack"
+#   category: expansion
+#   rating: 88
+#   parent_id:game_1
+
+# game_5:
+#   name: Super Mario Odyssey - Expansion Pack
+#   category: expansion
+#   rating: 90
+#   parent: game_2
+
+game_6:
+  name: Cyberpunk 2077
+  category: main_game
+  rating: 85
+
+game_invalid_with_invalid_rating:
+  name: Game With Invalid Rating
+  category: main_game
+  rating: 110
+
+# game_invalid_expansion_without_parent:
+#   name: Invalid Expansion Without Parent
+#   category: expansion
+#   rating: 80
+
+# game_invalid_main_game_with_parent_id:
+#   name: Invalid Main Game With Parent ID
+#   category: main_game
+#   rating: 85
+#   parent_id: 1
+
 one:
   name: MyString
   summary: MyText

@@ -20,5 +20,24 @@ class Game < ApplicationRecord
     main_game: 0,
     expansion: 1
   }
-  
+  # Model Validation
+  validates :name, presence: true, uniqueness: true
+  validates :category, presence: true
+  validates :rating, numericality: {
+    greater_than_or_equal_to: 0,
+    less_than_or_equal_to: 100,
+    allow_nil: true
+  }
+
+  validate :validate_parent
+
+  private
+
+  def validate_parent
+    if category == "expansion" && Game.find_by(id: parent_id).nil?
+      errors.add(:parent_id, "should be a valid parent game")
+    elsif category == "main_game" && parent_id
+      errors.add(:parent_id, "should be nil")
+    end
+  end
 end

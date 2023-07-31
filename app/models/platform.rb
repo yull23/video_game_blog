@@ -13,4 +13,9 @@ class Platform < ApplicationRecord
 
   # Model Validation
   validates :name, uniqueness: true, presence: true
+  validates :category, numericality: {
+    greater_than_or_equal_to: 0,
+    less_than_or_equal_to: 5,
+    only_integer: true
+  }
 end
