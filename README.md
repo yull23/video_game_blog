@@ -317,11 +317,11 @@ According to some additional information, "Rails uses a transaction to perform t
 
 The following shows the objects created that do not allow any test to be executed:
 
-![asd](/z_others/fixture_critic_yml.jpeg)
+![fixtures_critic.yml](/z_others/reference_images/fixture_critic_yml.jpeg)
 
 For all these reasons, null:false constraints in the database must be performed at the end of the model validations.
 
-## Initial testing using seed.rb
+### Initial testing using seed.rb
 
 ```
 
@@ -331,6 +331,12 @@ For all these reasons, null:false constraints in the database must be performed 
 
 - username, email: required and unique
 - birth_date: before 16 years from now. Message: You should be 16 years old to create an account (this one requires custom validations)
+
+Posee las siguientes validaciones, test y creación de objetos:
+
+![User Validation](/z_others/reference_images/user_validations.jpeg)
+
+El test para verificar la asociaciónes entre modelos, conlleva la creación del modelo critic:
 
 ### Critic:
 

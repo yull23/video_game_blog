@@ -2,12 +2,12 @@
 
 # En el archivo test/fixtures/users.yml
 valid_user_1:
-  username: yull23
+  username: yull1
   email: yull@example.com
   birth_date: 1990-07-15
 
 valid_user_2:
-  username: anotheruser
+  username: yull2
   email: anotheruser@example.com
   birth_date: 1995-04-30
 

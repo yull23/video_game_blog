@@ -35,7 +35,7 @@ class UserTest < ActiveSupport::TestCase
     assert duplicate_user.valid?
   end
 
-  test "validar edad mínima" do
+  test "Validate minimum age" do
     user = users(:invalid_user_under_16_years_old)
     assert_not user.valid?
     assert_includes user.errors.full_messages,
