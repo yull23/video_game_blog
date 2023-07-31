@@ -379,13 +379,17 @@ The test to verify the associations between models involves the creation of the 
 - name, category: required
 - name: unique
 
-The validation for the entry of platforms is shown:
+The validation to enter the platforms is shown:
 
 ![Platform Validation](/z_others/reference_images/platform_validation.jpeg)
 
 ### Genre:
 
 - name: required and unique
+
+The validation for the entry in genres is shown:
+
+![Genre Validation](/z_others/reference_images/genre_validations.jpeg)
 
 ### Company:
 
