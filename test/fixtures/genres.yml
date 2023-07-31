@@ -5,3 +5,12 @@ one:
 
 two:
   name: MyString
+
+genre_1:
+  name: Action
+
+genre_2:
+  name: RPG
+
+genre_3:
+  name: Adventure
