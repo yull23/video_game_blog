@@ -10,4 +10,8 @@ class Platform < ApplicationRecord
     portable_console: 4,
     computer: 5
   }
+
+  # Model Validation
+  # validates :name, uniqueness: true, presence: true
+  # validates :category, presence: true
 end

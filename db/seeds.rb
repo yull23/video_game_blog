@@ -48,9 +48,9 @@ game.platforms<<platform_1
 game.platforms<<platform_2
 
 
-game_parent=Game.create(name:"Mario Bros Run")
-game_parent.update(parent:game)
+game_expansion=Game.create(name:"Mario Bros Run")
+game_expansion.update(parent:game)
 
-game_expansion=Game.create(name:"Residen Evil")
-game_expansion.expansions.create(name: "Resident Evil 2")
+game_parent=Game.create(name:"Residen Evil")
+game_parent.expansions.create(name: "Resident Evil 2")
 

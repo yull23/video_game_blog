@@ -307,6 +307,26 @@ end
 
 ## Model validations
 
+Before creating the validations, it is important to consider that the existence of the objects is conditioned. When using `Model.create(...)`, it is possible for `Model.save` to be `False`. For this reason, it is recommended to first perform a data build using seeds. These data are not required to have any restrictions as they are only used for testing purposes. Furthermore, they can be gradually modified as development progresses.
+
+The purpose of using these test objects is to check the associations between models, polymorphism and other aspects.
+
+Another aspect to take into account is carrying out model validation tests. From these tests, it can be certain that the models have the corresponding validations for any data input by the user. Therefore, for successful test execution, it is suggested to perform a migration where the value of `null: false` is changed to `null: true` or empty. This will allow the tests to run correctly.
+
+According to some additional information, "Rails uses a transaction to perform tests, which means that at some point during the test execution, it will attempt to create a Model-related object that requires values ​​for columns that have the `null constraint. : false`. This is where the error occurs, as the related object does not meet the database requirements" (GPT Chat).
+
+The following shows the objects created that do not allow any test to be executed:
+
+![asd](/z_others/fixture_critic_yml.jpeg)
+
+For all these reasons, null:false constraints in the database must be performed at the end of the model validations.
+
+## Initial testing using seed.rb
+
+```
+
+```
+
 ### User:
 
 - username, email: required and unique

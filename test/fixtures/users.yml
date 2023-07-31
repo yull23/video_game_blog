@@ -1,5 +1,34 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# En el archivo test/fixtures/users.yml
+valid_user_1:
+  username: yull23
+  email: yull@example.com
+  birth_date: 1990-07-15
+
+valid_user_2:
+  username: anotheruser
+  email: anotheruser@example.com
+  birth_date: 1995-04-30
+
+invalid_user_without_username:
+  email: invalidusername@example.com
+  birth_date: 2005-05-20
+
+invalid_user_without_email:
+  username: invalidemail
+  birth_date: 2003-11-10
+
+invalid_user_by_email_format:
+  username: emailformatuser
+  email: notanemail
+  birth_date: 2000-08-25
+
+invalid_user_under_16_years_old:
+  username: underageuser
+  email: underage@example.com
+  birth_date: 2010-06-28
+
 one:
   username: MyString
   email: MyString

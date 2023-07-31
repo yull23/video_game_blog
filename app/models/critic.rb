@@ -6,7 +6,7 @@ class Critic < ApplicationRecord
   belongs_to :criticable, polymorphic: true
 
   # Model validation
-  validates :body, presence: true, length: { maximum: 40 }
+  # validates :body, presence: true, length: { maximum: 40 }
 
   # Conteo
   # after_create :count_create_critic
