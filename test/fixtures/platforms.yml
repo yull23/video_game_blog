@@ -1,5 +1,24 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+platform_1:
+  name: Console Platform
+  category: console
+
+platform_2:
+  name: Arcade Platform
+  category: arcade
+
+platform_3:
+  name: Platform Platform
+  category: platform
+
+platform_invalid_without_name:
+  category: computer
+
+platform_invalid_category_out_of_range:
+  name: Invalid Category Platform
+  category: 6
+
 one:
   name: MyString
   category: 1

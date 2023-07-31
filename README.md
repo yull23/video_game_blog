@@ -332,11 +332,11 @@ For all these reasons, null:false constraints in the database must be performed 
 - username, email: required and unique
 - birth_date: before 16 years from now. Message: You should be 16 years old to create an account (this one requires custom validations)
 
-Posee las siguientes validaciones, test y creación de objetos:
+It has the following validations, tests and creation of objects:
 
 ![User Validation](/z_others/reference_images/user_validations.jpeg)
 
-El test para verificar la asociaciónes entre modelos, conlleva la creación del modelo critic:
+The test to verify the associations between models involves the creation of the critical model:
 
 ### Critic:
 
@@ -378,6 +378,10 @@ El test para verificar la asociaciónes entre modelos, conlleva la creación del
 
 - name, category: required
 - name: unique
+
+The validation for the entry of platforms is shown:
+
+![Platform Validation](/z_others/reference_images/platform_validation.jpeg)
 
 ### Genre:
 
