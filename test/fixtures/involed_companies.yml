@@ -1,5 +1,35 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+involed_company_1:
+  company: company_1
+  game: game_1
+  developer: true
+  publisher: true
+
+involed_company_2:
+  company: company_2
+  game: game_2
+  developer: true
+  publisher: true
+
+involed_company_3:
+  company: company_3
+  game: game_3
+  developer: true
+  publisher: true
+
+involed_company_4:
+  company: company_1
+  game: game_2
+  developer: true
+  publisher: true
+
+involed_company_5:
+  company: company_3
+  game: game_1
+  developer: true
+  publisher: true
+
 one:
   company: one
   game: one
