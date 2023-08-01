@@ -15,4 +15,5 @@ rails generate migration AddDefaultCategoryToGames
 rails generate migration AddDefaultCategoryToPlatforms
 rails generate migration AddDefaultCriticsCountToUser 
 rails generate migration AddBirthDateToUser birth_date:date
-rails generate migration ChangeNullToTrueInSeveralColumns
+rails generate migration AddIndexToSeveralColumns
+rails generate migration ChangeNullTrueToFalseInSeveralColumns

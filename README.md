@@ -321,41 +321,75 @@ The following shows the objects created that do not allow any test to be execute
 
 For all these reasons, null:false constraints in the database must be performed at the end of the model validations.
 
-### Initial testing using seed.rb
+The validations carried out on the model are the following:
 
-### User:
+1. User:
 
-- username, email: required and unique
-- birth_date: before 16 years from now. Message: You should be 16 years old to create an account (this one requires custom validations)
+   - username, email: required and unique
+   - birth_date: before 16 years from now. Message: You should be 16 years old to create an account (this one requires custom validations)
 
-### Critic:
+1. Critic:
 
-- title, body: required
-- title: max 40 characters
+   - title, body: required
+   - title: max 40 characters
 
-### Game:
+1. Game:
 
-- name, category: required
-- name: unique
-- rating: between 0 and 100 (if provided)
-- parent_id: if the category is expansion, parent_id should be a valid game_id. If a category is main_game, parent_id should be null.
+   - name, category: required
+   - name: unique
+   - rating: between 0 and 100 (if provided)
+   - parent_id: if the category is expansion, parent_id should be a valid game_id. If a category is main_game, parent_id should be null.
 
-### Platform:
+1. Platform:
 
-- name, category: required
-- name: unique
+   - name, category: required
+   - name: unique
 
-The validation to enter the platforms is shown:
+1. Genre:
 
-### Genre:
+   - name: required and unique
 
-- name: required and unique
+1. Company:
 
-### Company:
+   - name: required and unique
 
-- name: required and unique
+1. InvolvedCompany:
 
-### InvolvedCompany:
+   - developer, publisher: required
+   - company_id and game_id should be a unique combination
 
-- developer, publisher: required
-- company_id and game_id should be a unique combination
+Once all the validations in the models have been completed, the necessary migrations are carried out to add the null: false constraints in the corresponding columns, where presence: true was used. It is also important to check that columns that have presence: true and uniqueness: true have an index for more efficient lookup and to ensure uniqueness of values. Also, make sure that models that have a has_many relationship include the dependent: :destroy property so that related records are automatically deleted when the parent record is deleted.
+
+1. Presence: true
+
+   - name => Game
+   - name => Company
+   - name => Platform
+   - name => Genre
+   - username => User
+   - email => User
+   - category => Game
+   - category => Platform
+   - title => Critic
+   - body => Critic
+   - developer => InvoledCompany
+   - publisher => InvoledCompany
+
+1. Uniqueness: true
+
+   - name => Game
+   - username => User
+   - email => User
+   - name => Company
+   - name => Platform
+   - name => Genre
+
+1. dependent: :destroy for has_many relation
+
+   - User has_many critics
+   - Company has_many involed_companies
+   - Company has_many critics
+   - Game has_many involed_companies
+   - Game has_many critics
+
+##
