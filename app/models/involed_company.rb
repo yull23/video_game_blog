@@ -4,8 +4,8 @@ class InvoledCompany < ApplicationRecord
   belongs_to :game
   # Model Validation
 
-  validates :developer, presence: true, inclusion: { in: [true, false] }
-  validates :publisher, presence: true, inclusion: { in: [true, false] }
+  validates :developer, inclusion: { in: [true, false] }
+  validates :publisher, inclusion: { in: [true, false] }
   validates :company_id, uniqueness: {
     scope: :game_id,
     message: "should be a unique combination"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_01_112447) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_01_114451) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,8 +71,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_112447) do
   create_table "involed_companies", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.bigint "game_id", null: false
-    t.boolean "developer", null: false
-    t.boolean "publisher", null: false
+    t.boolean "developer"
+    t.boolean "publisher"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_involed_companies_on_company_id"

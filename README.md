@@ -392,4 +392,10 @@ Once all the validations in the models have been completed, the necessary migrat
    - Game has_many involed_companies
    - Game has_many critics
 
-##
+Finally, without executing these migrations, and with the creation of data, we have:
+
+![Models tests completed](z_others/reference_images/verification_model_tests.jpeg)
+
+## Data input via seeds.rb
+
+Se realiza la entrada de datos, mediante los documentos del repositorio:

@@ -1,56 +1,124 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
- 
-# Datos de prueba
-InvoledCompany.destroy_all
+require "json"
+
+companies_data = JSON.parse(File.read("db/data/companies.json"))
+games_data = JSON.parse(File.read("db/data/games.json"))
+genres_data = JSON.parse(File.read("db/data/genres.json"))
+platforms_data = JSON.parse(File.read("db/data/platforms.json"))
+
+# p companies_data.present? && games_data.present? && genres_data.present? && platforms_data.present?
+
+puts "Start seeding"
+
 Company.destroy_all
+Platform.destroy_all
+Genre.destroy_all
 Game.destroy_all
-Critic.destroy_all
-User.destroy_all
 
 
-user=User.create(username:"Yull")
-company=Company.create(name:"Nintendo")
-game=Game.create(name:"Mario Bros")
-user.critics.create(title:"Title",criticable:game)
-user.critics.create(title:"Title",criticable:company)
+puts "Seeding companies"
+companies_data.each do |company_data|
+  new_company = Company.new(company_data)
+  puts "Company not created. Errors: #{new_company.errors.full_messages}" unless new_company.save
+end
+puts "Seeding platforms"
+platforms_data.each do |platform_data|
+  new_platform = Platform.new(platform_data)
+  puts "Platform not created. Errors: #{new_platform.errors.full_messages}" unless new_platform.save
+end
+puts "Seeding genres"
+genres_data.each do |genre_data|
+  new_genre = Genre.new(name:genre_data)
+  puts "Genre not created. Errors: #{new_genre.errors.full_messages}" unless new_genre.save
+end
 
-Critic.create(
-  title:"Title",
-  user_id:1,
-  criticable_type:"Game",
-  criticable_id:1
-)
-Critic.create(
-  title:"Title",
-  user_id:1,
-  criticable_type:"Company",
-  criticable_id:1
-)
+puts "Seeding main games"
 
-game.involed_companies.create(
-  developer:true,
-  publisher:true,
-  company:company
-)
-genre_1=Genre.create(name:"Terror")
-genre_2=Genre.create(name:"Adventure")
-game.genres<<genre_1
-game.genres<<genre_2
-platform_1=Platform.create(name:"Platform_1")
-platform_2=Platform.create(name:"Platform_2")
-game.platforms<<platform_1
-game.platforms<<platform_2
+main_games_data=games_data.select {|main_game_data| main_game_data["parent"].nil?}
 
 
-game_expansion=Game.create(name:"Mario Bros Run")
-game_expansion.update(parent:game)
+main_games_data.each do |main_game_data|
+  game_main=main_game_data.slice("name", "summary", "release_date", "category", "rating")
+  new_game=Game.new(game_main)
+  puts "Game not created. Errors: #{new_game.errors.full_messages} #{new_game.id}" unless new_game.save
 
-game_parent=Game.create(name:"Residen Evil")
-game_parent.expansions.create(name: "Resident Evil 2")
+  # Attributes with associations
+  genres=main_game_data["genres"]
+  platforms=main_game_data["platforms"]
+  involed_companies=main_game_data["involved_companies"]
+
+  # Seeding genres to main game
+
+  genres.each do |genre|
+    new_game.genres << Genre.find_by(name:genre)
+  end
+
+  # Seeding platforms to main game
+  platforms.each do |platform|
+    new_game.platforms << Platform.find_by(name:platform["name"])
+  end
+
+  # Seeding involed_companies to main game
+
+  involed_companies.each do |involed_company_data|
+    company=Company.find_by(name:involed_company_data["name"])
+    new_involed_company = InvoledCompany.new(
+      game:new_game,
+      company:company,
+      developer:involed_company_data["developer"],
+      publisher:involed_company_data["publisher"]
+    )
+    puts "Involved Company not created. Errors: #{new_involed_company.errors.full_messages}" unless new_involed_company.save
+  end
+end
+
+
+puts "Seeding games expansions"
+
+expansions_games_data=games_data.select {|expansions_game_data| !expansions_game_data["parent"].nil?}
+
+expansions_games_data.each do |expansions_game_data|
+  # Datos iniciales
+  expansion_game=expansions_game_data.slice("name", "summary", "release_date", "category", "rating","parent")
+  # Game parent
+  parent_game=Game.find_by(name:expansions_game_data["parent"])
+  expansion_game["parent"]=parent_game
+  # # Ahora expansion tiene referenciado parent
+  new_game=Game.new(expansion_game)
+  puts "Game not created. Errors: #{new_game.errors.full_messages} #{new_game.id}" unless new_game.save
+  
+  # Attributes with associations
+  genres=expansions_game_data["genres"]
+  platforms=expansions_game_data["platforms"]
+  involed_companies=expansions_game_data["involved_companies"]
+
+  # Seeding genres to main game
+
+  genres.each do |genre|
+    new_game.genres << Genre.find_by(name:genre)
+  end
+
+  # Seeding platforms to main game
+  platforms.each do |platform|
+    new_game.platforms << Platform.find_by(name:platform["name"])
+  end
+
+  # Seeding involed_companies to main game
+
+  involed_companies.each do |involed_company_data|
+    company=Company.find_by(name:involed_company_data["name"])
+    new_involed_company = InvoledCompany.new(
+      game:new_game,
+      company:company,
+      developer:involed_company_data["developer"],
+      publisher:involed_company_data["publisher"]
+    )
+    puts "Involved Company not created. Errors: #{new_involed_company.errors.full_messages}" unless new_involed_company.save
+  end
+end
+
+
+
+
+
+
 

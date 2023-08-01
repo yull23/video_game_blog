@@ -10,7 +10,7 @@ class ChangeNullTrueToFalseInSeveralColumns < ActiveRecord::Migration[7.0]
     change_column_null :platforms, :category, false
     change_column_null :critics, :title, false
     change_column_null :critics, :body, false
-    change_column_null :involed_companies, :developer, false
-    change_column_null :involed_companies, :publisher, false
+    # change_column_null :involed_companies, :developer, false
+    # change_column_null :involed_companies, :publisher, false
   end
 end
