@@ -13,9 +13,10 @@ class Platform < ApplicationRecord
 
   # Model Validation
   validates :name, uniqueness: true, presence: true
-  validates :category, numericality: {
+  validates :category, presence: true, numericality: {
     greater_than_or_equal_to: 0,
     less_than_or_equal_to: 5,
-    only_integer: true
+    only_integer: true,
+    message: "must only contain integer values between 0 and 5"
   }
 end

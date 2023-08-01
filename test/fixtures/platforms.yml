@@ -2,18 +2,18 @@
 
 platform_1:
   name: Console Platform
-  category: console
+  category: 1
 
 platform_2:
   name: Arcade Platform
-  category: arcade
+  category: 2
 
 platform_3:
   name: Platform Platform
-  category: platform
+  category: 3
 
 platform_invalid_without_name:
-  category: computer
+  category: 4
 
 platform_invalid_category_out_of_range:
   name: Invalid Category Platform

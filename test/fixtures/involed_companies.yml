@@ -29,15 +29,3 @@ involed_company_5:
   game: game_1
   developer: true
   publisher: true
-
-one:
-  company: one
-  game: one
-  developer: false
-  publisher: false
-
-two:
-  company: two
-  game: two
-  developer: false
-  publisher: false

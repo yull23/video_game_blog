@@ -20,17 +20,3 @@ company_3:
   start_date: 1975-04-04
   country: United States
   cover: string
-
-one:
-  name: MyString
-  description: MyText
-  start_date: 2023-07-27
-  country: MyString
-  cover: MyString
-
-two:
-  name: MyString
-  description: MyText
-  start_date: 2023-07-27
-  country: MyString
-  cover: MyString

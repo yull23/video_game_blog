@@ -28,15 +28,3 @@ invalid_user_under_16_years_old:
   username: underageuser
   email: underage@example.com
   birth_date: 2010-06-28
-
-one:
-  username: MyString
-  email: MyString
-  rol: MyString
-  critics_count: 1
-
-two:
-  username: MyString
-  email: MyString
-  rol: MyString
-  critics_count: 1

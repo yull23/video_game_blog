@@ -36,7 +36,6 @@ game_invalid_with_invalid_rating:
   name: Game With Invalid Rating
   category: main_game
   rating: 110
-
 # game_invalid_expansion_without_parent:
 #   name: Invalid Expansion Without Parent
 #   category: expansion
@@ -48,16 +47,3 @@ game_invalid_with_invalid_rating:
 #   rating: 85
 #   parent_id: 1
 
-one:
-  name: MyString
-  summary: MyText
-  release_date: 2023-07-27
-  rating: 9.99
-  cover: MyString
-
-two:
-  name: MyString
-  summary: MyText
-  release_date: 2023-07-27
-  rating: 9.99
-  cover: MyString
