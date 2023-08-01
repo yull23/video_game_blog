@@ -6,23 +6,22 @@ class Critic < ApplicationRecord
   belongs_to :criticable, polymorphic: true
 
   # Model validation
-  # validates :body, presence: true, length: { maximum: 40 }
+  validates :title, presence: true, length: { maximum: 40 }
+  validates :body, presence: true
+  after_create :count_create_critic
+  after_destroy :count_destroy_critic
 
-  # Conteo
-  # after_create :count_create_critic
-  # after_destroy :count_destroy_critic
+  private
 
-  # private
+  def count_create_critic
+    user_count = user
+    user.critics_count += 1
+    user_count.save
+  end
 
-  # def count_create_critic
-  #   user_count = user
-  #   user.critics_count += 1
-  #   user_count.save
-  # end
-
-  # def count_destroy_critic
-  #   user_count = user
-  #   user.critics_count -= 1
-  #   user_count.save
-  # end
+  def count_destroy_critic
+    user_count = user
+    user.critics_count -= 1
+    user_count.save
+  end
 end

@@ -1,2 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# Valid critic with all required attributes for a Game
+valid_critic_for_game_1:
+  criticable: game_1
+  title: "Amazing Game!"
+  body: "This game is absolutely incredible. I highly recommend it to everyone!"
+  user: valid_user_1
+
+# Valid critic with all required attributes for a Company
+valid_critic_for_company_1:
+  criticable: company_1
+  title: "Great Company!"
+  body: "Nintendo has created some of the best games in history."
+  user: valid_user_2
