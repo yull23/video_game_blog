@@ -398,4 +398,17 @@ Finally, without executing these migrations, and with the creation of data, we h
 
 ## Data input via seeds.rb
 
-Se realiza la entrada de datos, mediante los documentos del repositorio:
+Data entry is performed through the repository documents:
+
+The logic for data entry was based primarily on the import of files that were in JSON format, they were taken to a set of hashes and/or strings.
+
+```
+require "json"
+
+companies_data = JSON.parse(File.read("db/data/companies.json"))
+games_data = JSON.parse(File.read("db/data/games.json"))
+genres_data = JSON.parse(File.read("db/data/genres.json"))
+platforms_data = JSON.parse(File.read("db/data/platforms.json"))
+```
+
+As a result of this, all the platforms, genres, companies, main games and expansion games objects were created.
