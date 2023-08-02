@@ -412,3 +412,29 @@ platforms_data = JSON.parse(File.read("db/data/platforms.json"))
 ```
 
 As a result of this, all the platforms, genres, companies, main games and expansion games objects were created.
+
+## CRUD
+
+### Creating the controllers
+
+First it was done when creating the controllers, and of the routes that correspond to each one of these, these were done manually, and also, the order in which they are created must be taken into account.
+
+This should be the order of creation (Remember that the name of the controller reflects the model, and it must be in the plural)
+
+It must be remembered that the routes are the places where the requests are made, so it is expected that editing a company will be found when it is being viewed (that is, within show).
+
+1. patch "/controllers/:id", to: "controllers#update"
+1. post "/controllers", to: "controllers#create"
+1. get "/controllers/new", to: "controllers#new", as: :new_controller
+1. get "/controllers/:id", to: "controllers#show", as: :controller
+1. get "/controllers/:id/edit", to: "controllers#edit", as: :edit_controller
+1. get "/controllers", to: "controllers#index"
+1. delete "/controllers/:id", to: "controllers#destroy"
+
+### Controller Companies
+
+#### Route Post
+
+Cuando se realiza la creación mediante la ruta new_companies, se realiza un envio post, y para captura estos valores, se debe declarar:
+
+![Alt text](z_others/reference_images/post_route.png)

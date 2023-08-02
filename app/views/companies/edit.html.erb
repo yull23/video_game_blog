@@ -1,0 +1,22 @@
+<h1>Edit Company</h1>
+<%= form_with model:@company do |form| %>
+  <div>
+    <div><%= form.label :name, "Name:" %></div>
+    <div><%= form.text_field :name %></div>
+  </div>
+  <div>
+    <div><%= form.label :description, "Description:" %></div>
+    <div><%= form.text_area :description %></div>
+  </div>
+  <div>
+    <div><%= form.label :country, "Country:" %></div>
+    <div><%= form.text_area :country %></div>
+  </div>
+  <div>
+    <div><%= form.label :start_date, "Start Date:" %></div>
+    <div><%= form.text_area :start_date %></div>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
